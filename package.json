@@ -1,0 +1,87 @@
+{
+  "name": "botdrop-host",
+  "productName": "BotDrop Host",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Local Discord bot host for Windows.",
+  "license": "MIT",
+  "author": "RayanMP33",
+  "homepage": "https://github.com/RayanMP33/botdrop-host#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RayanMP33/botdrop-host.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RayanMP33/botdrop-host/issues"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "electron",
+    "react",
+    "local-hosting",
+    "bot-hosting"
+  ],
+  "main": "dist-electron/electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1 --port 5187 --strictPort\" \"tsc -p electron/tsconfig.json --watch --preserveWatchOutput\" \"wait-on tcp:5187 file:dist-electron/electron/main.js && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5187 electron .\"",
+    "build": "tsc -b && vite build && tsc -p electron/tsconfig.json",
+    "dist:win": "npm run build && electron-builder --win",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "extract-zip": "^2.0.1",
+    "lucide-react": "^1.16.0",
+    "pidusage": "^4.0.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "@types/node": "^24.12.3",
+    "@types/pidusage": "^2.0.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1",
+    "eslint": "^10.3.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "tailwindcss": "^4.3.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vite": "^8.0.12",
+    "wait-on": "^9.0.10"
+  },
+  "build": {
+    "appId": "local.botdrop.host",
+    "productName": "BotDrop Host",
+    "asarUnpack": [
+      "node_modules/extract-zip/**/*"
+    ],
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
