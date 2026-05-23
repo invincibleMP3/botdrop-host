@@ -23,11 +23,11 @@ if errorlevel 1 (
 
 git remote get-url origin >nul 2>nul
 if errorlevel 1 (
-  git remote add origin https://github.com/RayanMP33/botdrop-host.git
+  git remote add origin https://github.com/invincibleMP3/botdrop-host.git
 )
 
 echo Creating public GitHub repo and pushing main...
-gh repo create RayanMP33/botdrop-host --public --source . --remote origin --push
+gh repo create invincibleMP3/botdrop-host --public --source . --remote origin --push
 if errorlevel 1 (
   echo Repo may already exist. Trying a normal push...
   git push -u origin main
@@ -35,7 +35,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo Uploaded: https://github.com/RayanMP33/botdrop-host
+echo Uploaded: https://github.com/invincibleMP3/botdrop-host
 pause
 exit /b 0
 
